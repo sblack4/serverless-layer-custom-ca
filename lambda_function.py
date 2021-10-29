@@ -4,6 +4,7 @@ import os
 
 
 foobar = ssl.get_default_verify_paths()
+print(foobar)
 foobar = os.listdir(foobar.openssl_capath)
 
 def lambda_handler(event, context):

@@ -26,6 +26,7 @@ functions:
     runtime: python3.6
     environment:
       REQUESTS_CA_BUNDLE: python/cert.pem
+      SSL_CERT_FILE: python/cert.pem
     layers:
       - { Ref: CustomCALambdaLayer }
 
