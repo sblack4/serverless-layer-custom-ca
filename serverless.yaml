@@ -18,12 +18,21 @@ layers:
     description: A Layer to add my custom CA
     compatibleRuntimes:
       - python3.6
+      - nodejs14.x
 
 functions:
-  testLayer:
+  testPython:
     handler: lambda_function.lambda_handler
     runtime: python3.6
     environment:
       REQUESTS_CA_BUNDLE: python/cert.pem
+    layers:
+      - { Ref: CustomCALambdaLayer }
+
+  testNode:
+    handler: lambda_function.lambda_handler
+    runtime: nodejs14.x
+    environment:
+      NODE_EXTRA_CA_CERTS: nodejs/cert.pem
     layers:
       - { Ref: CustomCALambdaLayer }
