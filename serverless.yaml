@@ -1,0 +1,29 @@
+---
+
+service: serverless-layer-custom-ca
+frameworkVersion: ">2.0.0"
+
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+
+package:
+  patterns:
+    - layer
+    - lambda_function.py
+
+layers:
+  customCA:
+    path: layer
+    description: A Layer to add my custom CA
+    compatibleRuntimes:
+      - python3.6
+
+functions:
+  testLayer:
+    handler: lambda_function.lambda_handler
+    runtime: python3.6
+    environment:
+      REQUESTS_CA_BUNDLE: python/cert.pem
+    layers:
+      - { Ref: CustomCALambdaLayer }
